@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+//This is a sample protobuf object that can be
+//compiled to different languages with protoc
+
+//https://developers.google.com/protocol-buffers/docs/proto3
+
+package Protobuf;
+
+message SampleObject {
+    int32  type         = 1;
+    string objectName   = 2;
+    string sampleString = 3;
+    int32 sampleInt     = 4;
+    float sampleFloat   = 5;
+}

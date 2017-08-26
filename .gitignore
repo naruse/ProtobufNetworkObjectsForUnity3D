@@ -1,0 +1,32 @@
+# ---------------[ Unity generated ]------------------ #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+Assets/ProDrawCallExamples.unitypackage
+Assets/ProDrawCallExamples.unitypackage.meta
+# ---------------[ Unity Not to Update ]------------------ #
+Assets/ProDrawCallOptimizer/ProDrawCallExamples.unitypackage
+Assets/ProDrawCallOptimizer/ProDrawCallExamples.unitypackage.meta
+# ----[ Visual Studio / MonoDevelop generated ]------- #
+
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# -------------[ OS generated ]------------------------ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
