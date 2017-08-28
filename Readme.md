@@ -148,6 +148,7 @@ void Update() {
             case ProtobufMessageTypes.SAMPLE_OBJECT:
                 SampleObject sampleObject = (SampleObject) pm.Protobuf;
                 //Do something with our object
+                PrintSampleObjectFields(sampleObject);
                 break;
             }
         }
