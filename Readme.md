@@ -81,7 +81,8 @@ and compile the protobuffer for C#. After that you are pretty much done.
 
 Our *SampleObject.proto* looks like this:
 
-`package Protobuf;
+```csharp
+package Protobuf;
 
 message SampleObject {
     int32  type         = 1;
@@ -89,7 +90,8 @@ message SampleObject {
     string sampleString = 3;
     int32 sampleInt     = 4;
     float sampleFloat   = 5;
-}`
+}
+```
 
 It contains a *type* which is **necessary** for all your objects you want to
 transmit. 2 sample strings, a float and an integer.
@@ -97,50 +99,58 @@ transmit. 2 sample strings, a float and an integer.
 After compiling the protocol buffer to C# we need to tell the system with a
 unique identifier the type of the object. This is added in  *ProtobufMessagesTypes.cs*
 
->//ProtobufMessageTypes.cs
->public static class ProtobufMessageTypes {
->    public const int SAMPLE_OBJECT = 1;//can have any value, just make sure is unique
->}
+```csharp
+//ProtobufMessageTypes.cs
+public static class ProtobufMessageTypes {
+    public const int SAMPLE_OBJECT = 1;//can have any value, just make sure is unique
+}
+```
 
 Then, we create a function for creating this object message in
 *MessageCreator.cs*. Here we define a function that creates an object with
 the parameters and returns a message (See MessageCreator.cs for the
 implementation details).
 
->//MessageCreator.cs
->public static Message CreateSampleObjectMessage(string objName, string sampleStr, int sampleInt, float sampleFloat)
+```csharp
+//MessageCreator.cs
+public static Message CreateSampleObjectMessage(string objName, string sampleStr, int sampleInt, float sampleFloat)
+```
 
 In order to receive and undertand the message, we have to convert the message
 to a ProtobufMessage, this is done in *DeserializeByType(int type, MemoryStream memStream)*
 
->//MessageDeserializer.cs
->private static ProtobufMessage DeserializeByType(int type, MemoryStream memStream) {
->    object protobuf = null;
->    switch (type) {
->        case ProtobufMessageTypes.SAMPLE_OBJECT:
->            protobuf = Protobuf.SampleObject.Parser.ParseFrom(memStream);
->            break;
->        default:
->            return null;
->    }
->    return new ProtobufMessage(protobuf, type);
->}
+```csharp
+//MessageDeserializer.cs
+private static ProtobufMessage DeserializeByType(int type, MemoryStream memStream) {
+    object protobuf = null;
+    switch (type) {
+        case ProtobufMessageTypes.SAMPLE_OBJECT:
+            protobuf = Protobuf.SampleObject.Parser.ParseFrom(memStream);
+            break;
+        default:
+            return null;
+    }
+    return new ProtobufMessage(protobuf, type);
+}
+```
 
 Finally, in the *Update()* function in *ServerTest.cs* we can cast our
 ProtobufMessage.cs with the specific type to our object.
 
->// ServerTest.cs
->void Update() {
->    if(messageQueue.Count > 0) {//when there's a protobuf message in the queue, we print it
->        ProtobufMessage pm;
->        messageQueue.TryDequeue(out pm);
->
->        switch(pm.MessageType) {
->            case ProtobufMessageTypes.SAMPLE_OBJECT:
->                SampleObject sampleObject = (SampleObject) pm.Protobuf;
->                //Do something with our object
->                break;
->            }
->        }
->    }
->}
+```csharp
+// ServerTest.cs
+void Update() {
+    if(messageQueue.Count > 0) {//when there's a protobuf message in the queue, we print it
+        ProtobufMessage pm;
+        messageQueue.TryDequeue(out pm);
+
+        switch(pm.MessageType) {
+            case ProtobufMessageTypes.SAMPLE_OBJECT:
+                SampleObject sampleObject = (SampleObject) pm.Protobuf;
+                //Do something with our object
+                break;
+            }
+        }
+    }
+}
+```
