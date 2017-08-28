@@ -81,15 +81,15 @@ and compile the protobuffer for C#. After that you are pretty much done.
 
 Our *SampleObject.proto* looks like this:
 
->package Protobuf;
->
->message SampleObject {
->    int32  type         = 1;
->    string objectName   = 2;
->    string sampleString = 3;
->    int32 sampleInt     = 4;
->    float sampleFloat   = 5;
->}
+`package Protobuf;
+
+message SampleObject {
+    int32  type         = 1;
+    string objectName   = 2;
+    string sampleString = 3;
+    int32 sampleInt     = 4;
+    float sampleFloat   = 5;
+}`
 
 It contains a *type* which is **necessary** for all your objects you want to
 transmit. 2 sample strings, a float and an integer.
